@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+
+.minWidth {
+  min-width: 50%;
+}
+
+#author {
+  font-size: medium;
+  font-weight: lighter;
+}
