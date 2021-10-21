@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
-import CountriesTable from './CountriesTable'
+import CountriesTable from "./CountriesTable";
 
-const ParticularTable = ({ name }) => {
+const ParticularTable = ({ name, submitted }) => {
   const [country, setCountry] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`)
+    fetch(`https://restcountries.com/v2/name/${name}?fullText=true`)
       .then((response) => response.json())
       .then((res2) => {
         if (res2.status !== 404 && res2.status !== 500) setCountry(res2);
         else setCountry(null);
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
-
-    setIsLoading(false);
-  }, [name]);
+  }, [submitted]);
 
   if (isLoading) {
     return <h1> Loading... </h1>;
@@ -25,7 +24,7 @@ const ParticularTable = ({ name }) => {
     return <h1> Country Not Found</h1>;
   }
 
-  console.log(country);
+  // console.log(country);
   return <CountriesTable countries={country} />;
 };
 
